@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,13 +27,13 @@ SECRET_KEY = 'django-insecure-mxrwi=irof)5=9$lofy$p64i@4jf%0n2=d#rek^r4x^%v!s=l%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['projetcatalog.herokuapp.com']
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'tinymce',
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,11 +41,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'siteweb.apps.SitewebConfig',
+    'prestations.apps.PrestationsConfig',
     
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -125,7 +129,7 @@ MEDIA_URL = '/media/'
 
 STATICFILES_DIRS = [BASE_DIR /'static']
 
-STATIC_ROOT = BASE_DIR / 'static_cdn'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_ROOT = BASE_DIR / 'media_cdn'
 
@@ -133,3 +137,4 @@ MEDIA_ROOT = BASE_DIR / 'media_cdn'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+django_heroku.settings(locals())
