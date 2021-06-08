@@ -11,6 +11,14 @@ def index(request):
     return render(request, 'index.html')
 
 
+def video(request):
+    return render(request, 'video.html')
+
+
+def photodetail(request):
+    return render(request, 'photo-detail.html')
+
+
 def contact(request):
     return render(request, 'contact.html')
 
